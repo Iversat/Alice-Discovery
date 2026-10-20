@@ -1,0 +1,4 @@
+include LEGAL_NOTICE.md CHANGELOG.md
+include requirements.txt
+recursive-include docs *.md *.svg
+recursive-include tests *.py
