@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-labelledby="title description">
-  <title id="title">Alice Discovery</title>
-  <desc id="description">Independent research tool for discovering smart speaker advertisements on a local network.</desc>
+  <title id="title">LS Discovery</title>
+  <desc id="description">LS Discovery by Iversat. Smart speaker services on a local network.</desc>
   <defs><linearGradient id="surface" x2="1" y2="1"><stop stop-color="#101e26"/><stop offset="1" stop-color="#0b1017"/></linearGradient></defs>
   <rect width="1280" height="360" rx="24" fill="url(#surface)"/>
   <path d="M0 1h1280" stroke="#334155"/>
   <g font-family="Segoe UI,Arial,sans-serif">
-    <text x="64" y="64" fill="#5eead4" font-size="14" font-weight="600" letter-spacing="3">IVERSAT / LOCAL NETWORK RESEARCH</text>
-    <text x="60" y="165" fill="#f8fafc" font-size="76" font-weight="700" letter-spacing="-2">Alice Discovery</text>
-    <text x="64" y="216" fill="#94a3b8" font-size="23">Discover the speakers around you.</text>
+    <text x="64" y="64" fill="#5eead4" font-size="14" font-weight="600" letter-spacing="3">IVERSAT / PYTHON PROJECTS</text>
+    <text x="60" y="165" fill="#f8fafc" font-size="76" font-weight="700" letter-spacing="-2">LS Discovery</text>
+    <text x="64" y="216" fill="#94a3b8" font-size="23">Discover services on your network.</text>
     <rect x="64" y="262" width="170" height="34" rx="17" fill="#143b3c"/>
     <text x="149" y="284" fill="#99f6e4" font-size="13" font-weight="600" text-anchor="middle">mDNS / IPv4 / IPv6</text>
     <text x="258" y="284" fill="#94a3b8" font-size="13" letter-spacing="2">LOCAL · INDEPENDENT · UNOFFICIAL</text>
