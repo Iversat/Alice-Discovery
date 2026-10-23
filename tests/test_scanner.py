@@ -157,3 +157,33 @@ def test_fallback_name_without_server():
         name=NAME, server=None, type=TYPE, port=1, properties={}, parsed_scoped_addresses=lambda: []
     )
     assert scanner.service_record(info)["name"] == "Speaker"
+
+
+@pytest.mark.parametrize("interfaces", [[], [""], ["Ethernet"], ["999.1.1.1"], ["192.0.2.1/24"]])
+def test_bad_interface_rejected_before_network(monkeypatch, interfaces):
+    factory = Mock()
+    monkeypatch.setattr(scanner, "Zeroconf", factory)
+    with pytest.raises(ValueError, match="адрес"):
+        scanner.scan_local_network_for_speakers(1, interfaces=interfaces)
+    factory.assert_not_called()
+
+
+def test_interface_addresses_normalized_and_deduplicated():
+    assert scanner.validate_interfaces(["192.0.2.1", "2001:0db8::1", "192.0.2.1"]) == [
+        "192.0.2.1",
+        "2001:db8::1",
+    ]
+    assert scanner.validate_interfaces(["fe80::1%3"]) == ["fe80::1%3"]
+
+
+def test_terminal_control_characters_do_not_escape_or_change_records(capsys):
+    record = scanner.service_record(make_info())
+    record["name"] = "Колонка\x1b[2J\nspoof"
+    record["service_name"] = "Demo\u202e._yandexio._tcp.local."
+    scanner.print_records([record])
+    output = capsys.readouterr().out
+    assert "\x1b" not in output
+    assert "\u202e" not in output
+    assert "Колонка" in output
+    assert "\\x1b[2J\\nspoof" in output
+    assert json.loads(json.dumps(record))["name"] == "Колонка\x1b[2J\nspoof"

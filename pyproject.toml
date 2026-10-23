@@ -3,9 +3,9 @@ requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ls-discovery"
-version = "0.2.1"
-description = "LS Discovery: smart speaker service discovery over mDNS"
+name = "alice-discovery"
+version = "0.2.2"
+description = "Alice Discovery: smart speaker service discovery over mDNS"
 readme = "README.md"
 authors = [{name = "Iversat"}]
 requires-python = ">=3.11"
@@ -19,8 +19,8 @@ ls-discovery = "multiroom_scanner:main"
 alice-discovery = "multiroom_scanner:main"
 
 [project.urls]
-Repository = "https://github.com/Iversat/LS-Discovery"
-Issues = "https://github.com/Iversat/LS-Discovery/issues"
+Repository = "https://github.com/Iversat/Alice-Discovery"
+Issues = "https://github.com/Iversat/Alice-Discovery/issues"
 
 [tool.setuptools]
 py-modules = ["multiroom_scanner"]
