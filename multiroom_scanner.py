@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+import ipaddress
 import json
 import logging
 import math
@@ -99,6 +100,30 @@ def validate_service_types(types: Sequence[str]) -> list[str]:
     return result
 
 
+def validate_interfaces(interfaces: Sequence[str] | None) -> list[str] | None:
+    if interfaces is None:
+        return None
+    if not interfaces:
+        raise ValueError("Укажите хотя бы один IP-адрес интерфейса.")
+    result = []
+    for value in interfaces:
+        try:
+            address = str(ipaddress.ip_address(value))
+        except ValueError:
+            raise ValueError("Интерфейс должен быть локальным IPv4- или IPv6-адресом.") from None
+        if address not in result:
+            result.append(address)
+    return result
+
+
+def terminal_text(value: object) -> str:
+    """Display network-provided text without executing terminal control sequences."""
+    return "".join(
+        char if char.isprintable() else char.encode("unicode_escape").decode("ascii")
+        for char in str(value)
+    )
+
+
 def scan_local_network_for_speakers(
     scan_duration_seconds: float = 10,
     service_types: Sequence[str] | None = None,
@@ -113,6 +138,7 @@ def scan_local_network_for_speakers(
     types = validate_service_types(
         DEFAULT_SERVICE_TYPES if service_types is None else service_types
     )
+    interfaces = validate_interfaces(interfaces)
     listener = MyListener()
     zc = Zeroconf(interfaces=interfaces if interfaces is not None else InterfaceChoice.All)
     browser = None
@@ -135,13 +161,13 @@ def print_records(records: list[dict[str, Any]]) -> None:
     if not records:
         print("Устройства не объявляют выбранные сервисы или mDNS недоступен в этой сети.")
     for index, record in enumerate(records, 1):
-        addresses = ", ".join(record["addresses"]) or "не объявлены"
-        print(f"\n{index:02d}  {record['name']}")
-        print(f"    Сервис   {record['type']}")
+        addresses = terminal_text(", ".join(record["addresses"])) or "не объявлены"
+        print(f"\n{index:02d}  {terminal_text(record['name'])}")
+        print(f"    Сервис   {terminal_text(record['type'])}")
         print(f"    Адреса   {addresses}")
-        print(f"    Порт     {record['port']}")
-        print(f"    Имя      {record['service_name']}")
-        print(f"    TXT      {json.dumps(record['properties'], ensure_ascii=False)}")
+        print(f"    Порт     {terminal_text(record['port'])}")
+        print(f"    Имя      {terminal_text(record['service_name'])}")
+        print(f"    TXT      {terminal_text(json.dumps(record['properties'], ensure_ascii=False))}")
 
 
 def main(argv: Sequence[str] | None = None) -> int:

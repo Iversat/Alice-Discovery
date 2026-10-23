@@ -1,26 +1,35 @@
-![LS Discovery — обнаружение сервисов в локальной сети](docs/banner.svg)
+![Alice Discovery — обнаружение сервисов в локальной сети](docs/banner.svg)
 
-# LS Discovery
+# Alice Discovery
 
-Я разрабатываю LS Discovery для поиска объявлений умных колонок в локальной сети. Инструмент получает mDNS/DNS-SD-записи и показывает адреса, порты и TXT-свойства сервисов.
+Я разрабатываю Alice Discovery для поиска объявлений умных колонок в локальной сети. Инструмент получает mDNS/DNS-SD-записи и показывает адреса, порты и TXT-свойства сервисов.
 
 **Python 3.11+** · **mDNS / DNS-SD** · **IPv4 + IPv6** · **JSON**
 
 [Установка](#установка) · [Использование](#использование) · [Python API](#python-api) · [Проверки](docs/TESTING.md)
 
-Я веду проект независимо от производителей устройств. Обнаружение сервисов не предоставляет управление колонками; мультирум и синхронное воспроизведение в LS Discovery не реализованы.
+Я веду проект независимо от производителей устройств. Обнаружение сервисов не предоставляет управление колонками; мультирум и синхронное воспроизведение в Alice Discovery не реализованы.
 
 ## Установка
 
 ```powershell
-git clone https://github.com/Iversat/LS-Discovery.git
-cd LS-Discovery
+git clone https://github.com/Iversat/Alice-Discovery.git
+cd Alice-Discovery
 py -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -e .
 .\.venv\Scripts\python.exe multiroom_scanner.py
 ```
 
-В Linux и macOS используйте `python3 -m venv .venv` и `.venv/bin/python`. После установки доступна команда `ls-discovery`. Прежнюю команду `alice-discovery` и файл `multiroom_scanner.py` я сохранил для совместимости.
+В Linux и macOS используйте `python3 -m venv .venv` и `.venv/bin/python`. После установки доступна команда `alice-discovery`. Команду `ls-discovery` и файл `multiroom_scanner.py` я сохранил для совместимости.
+
+## Обновление прежней установки
+
+Если вы устанавливали проект под старым именем, я рекомендую удалить прежний пакет из того же виртуального окружения перед обновлением: разные пакеты могут содержать одинаковые Python-модули и команды.
+
+```powershell
+.\.venv\Scripts\python.exe -m pip uninstall ls-discovery alice-discovery-research
+.\.venv\Scripts\python.exe -m pip install -e "."
+```
 
 ## Использование
 
@@ -86,6 +95,6 @@ for record in records:
 
 Я использую pytest, Ruff и GitHub Actions. Команды проверок — в [docs/TESTING.md](docs/TESTING.md), изменения версий — в [CHANGELOG.md](CHANGELOG.md).
 
-Об ошибках напишите мне в [Issues](https://github.com/Iversat/LS-Discovery/issues). Перед публикацией отчёта удалите имена, адреса и идентификаторы домашних устройств. Для чувствительных сообщений см. [SECURITY.md](SECURITY.md).
+Об ошибках напишите мне в [Issues](https://github.com/Iversat/Alice-Discovery/issues). Перед публикацией отчёта удалите имена, адреса и идентификаторы домашних устройств. Для чувствительных сообщений см. [SECURITY.md](SECURITY.md).
 
 Исследуйте собственную сеть либо получите разрешение её владельца. Правовой статус проекта описан в [LEGAL_NOTICE.md](LEGAL_NOTICE.md).

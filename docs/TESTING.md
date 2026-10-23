@@ -1,6 +1,6 @@
-# Проверка LS Discovery
+# Проверка Alice Discovery
 
-Я использую pytest для преобразования записей и обработки событий mDNS, Ruff — для проверки кода. GitHub Actions запускает проверки в Windows и Linux на Python 3.11, 3.12 и 3.14. Результаты доступны в [Actions](https://github.com/Iversat/LS-Discovery/actions).
+Я использую pytest для преобразования записей и обработки событий mDNS, Ruff — для проверки кода. GitHub Actions запускает проверки в Windows и Linux на Python 3.11, 3.12 и 3.14. Результаты доступны в [Actions](https://github.com/Iversat/Alice-Discovery/actions).
 
 ## Автоматические проверки
 
